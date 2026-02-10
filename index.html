@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error 404 - Love Not Found</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .error-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 60px 40px;
+            text-align: center;
+            max-width: 600px;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .error-code {
+            font-size: 72px;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .error-title {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .error-message {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .error-content {
+            display: none;
+        }
+
+        .error-content.show {
+            display: block;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-no {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-no:hover {
+            background: #d0d0d0;
+            transform: translate(20px, 0);
+        }
+
+        .valentine-container {
+            display: none;
+            animation: heartFloat 0.8s ease-out;
+        }
+
+        .valentine-container.show {
+            display: block;
+        }
+
+        @keyframes heartFloat {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .hearts {
+            font-size: 40px;
+            margin: 20px 0;
+            animation: bounce 0.6s ease-out;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .valentine-message {
+            font-size: 36px;
+            color: #e91e63;
+            font-weight: bold;
+            margin: 30px 0;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 5px #e91e63;
+            }
+            50% {
+                text-shadow: 0 0 20px #e91e63, 0 0 30px #ff1493;
+            }
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #764ba2;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        .heart-rain {
+            position: fixed;
+            pointer-events: none;
+        }
+
+        .heart-rain span {
+            display: block;
+            position: absolute;
+            left: 0;
+            color: #ff1493;
+            font-size: 30px;
+            opacity: 0.8;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <!-- Error Page Content -->
+        <div class="error-content show" id="errorContent">
+            <div class="error-code">💔 404</div>
+            <div class="error-title">Error: Love Not Found</div>
+            <div class="error-message">
+                The feelings you're looking for could not be located on this server.
+                <br><br>
+                However, there might be a solution...
+            </div>
+            <div class="button-container">
+                <button class="btn btn-yes" onclick="revealValentine()">YES</button>
+                <button class="btn btn-no" onclick="runAway()">NO</button>
+            </div>
+        </div>
+
+        <!-- Valentine Content -->
+        <div class="valentine-container" id="valentineContent">
+            <div class="hearts">💕</div>
+            <div class="valentine-message">I WILL BE YOUR VALENTINE</div>
+            <div class="subtitle">
+                ✨ Surprise! ✨
+                <br><br>
+                You've unlocked the sweetest message in the system! 💗
+            </div>
+            <div class="button-container">
+                <button class="btn btn-yes" onclick="resetPage()">Start Over</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function revealValentine() {
+            const errorContent = document.getElementById('errorContent');
+            const valentineContent = document.getElementById('valentineContent');
+            
+            errorContent.classList.remove('show');
+            setTimeout(() => {
+                valentineContent.classList.add('show');
+                createHeartRain();
+            }, 300);
+        }
+
+        function runAway() {
+            const btn = event.target;
+            const container = document.querySelector('.error-container');
+            
+            // Fun animation for "no" button
+            let x = 0;
+            let y = 0;
+            const moveButton = () => {
+                x = Math.random() * 200 - 100;
+                y = Math.random() * 200 - 100;
+                btn.style.transform = `translate(${x}px, ${y}px)`;
+            };
+            
+            const timer = setInterval(moveButton, 100);
+            setTimeout(() => {
+                clearInterval(timer);
+                btn.textContent = "You can't escape love! 💘";
+                btn.disabled = true;
+                btn.style.cursor = 'not-allowed';
+            }, 2000);
+        }
+
+        function resetPage() {
+            const errorContent = document.getElementById('errorContent');
+            const valentineContent = document.getElementById('valentineContent');
+            
+            valentineContent.classList.remove('show');
+            setTimeout(() => {
+                errorContent.classList.add('show');
+            }, 300);
+            
+            // Remove heart rain
+            document.querySelectorAll('.heart-rain').forEach(el => el.remove());
+        }
+
+        function createHeartRain() {
+            const container = document.createElement('div');
+            container.className = 'heart-rain';
+            document.body.appendChild(container);
+            
+            const hearts = ['❤️', '💕', '💖', '💗', '💝', '🌹', '✨'];
+            const duration = 3;
+            
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('span');
+                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDuration = (Math.random() * 2 + duration) + 's';
+                    heart.style.animationDelay = (Math.random() * 0.5) + 's';
+                    container.appendChild(heart);
+                }, i * 100);
+            }
+            
+            setTimeout(() => {
+                container.remove();
+            }, (duration + 2) * 1000);
+        }
+    </script>
+</body>
+</html>
